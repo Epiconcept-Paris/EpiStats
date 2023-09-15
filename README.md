@@ -1,8 +1,9 @@
-# EpiStats [![rpackages.io rank](https://www.rpackages.io/badge/EpiStats.svg)](https://www.rpackages.io/package/EpiStats)
-
-
+# EpiStats
 Package R for epidemiologists
 
+## 2018-09-18 Release 1.2
+
+- Function crossTable added
 
 ## 2018-06-05 Release 1.1
 

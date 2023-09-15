@@ -33,17 +33,18 @@ ret <- CC(DF, "ill", "tira", exact = FALSE)
 ret
 ```
 ```{r results='asis', warning=FALSE}
-kable(ret$DF1, align=ret$DF1.align)
-kable(ret$DF2, digits=ret$DF2.digits)
+kable(ret$df1, align=ret$df1.align)
+kable(ret$df2, digits=ret$df2.digits)
 ```
 
 \newpage
 ## CC ill - beer
 
 ```{r results='asis'}
-result <- CC(DF, "ill", "beer", exact = TRUE)
-kable(result$DF1, align=result$DF1.align)
-kable(result$DF2, digits=result$DF2.digits)
+result <- CC(DF, ill, beer, exact = TRUE)
+kable(result$df1, align=result$df1.align)
+kable(result$df2, digits=result$df2.digits)
+
 ```
 
 ```{r}

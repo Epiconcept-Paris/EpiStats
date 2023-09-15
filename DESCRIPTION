@@ -1,8 +1,8 @@
 Package: EpiStats
 Type: Package
 Title: Tools for Epidemiologists
-Version: 1.1
-Date: 2018-06-05
+Version: 1.4-1
+Date: 2020-04-21
 Authors@R: c(person("Jean Pierre", "Decorps", role = c("aut", "cre"),
                      email = "jp.decorps@epiconcept.fr"),
               person("Esther","Kissling", role = "ctb", 

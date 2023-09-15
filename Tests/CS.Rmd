@@ -21,10 +21,11 @@ library(knitr)
 
 
 ```{r}
-data(Tiramitsu)
-DF <- Tiramitsu
+data(Tiramisu)
+DF <- Tiramisu
 #kable(str(DF))
 ```
+
 
 \newpage
 ## CS ill - mousse
