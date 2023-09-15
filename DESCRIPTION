@@ -1,12 +1,14 @@
 Package: EpiStats
 Type: Package
 Title: Tools for Epidemiologists
-Version: 1.4-1
+Version: 1.5-2
 Date: 2020-04-21
-Authors@R: c(person("Jean Pierre", "Decorps", role = c("aut", "cre"),
+Authors@R: c(person("Jean Pierre", "Decorps", role = c("aut"),
                      email = "jp.decorps@epiconcept.fr"),
               person("Esther","Kissling", role = "ctb", 
-                email = "e.kissling@epiconcept.fr")
+                email = "e.kissling@epiconcept.fr"),
+              person("Lore", "Merdrignac", role = c("cre"),
+                     email = "l.merdrignac@epiconcept.fr")
               )
 Description: Provides set of functions aimed at epidemiologists. 
  They include commands for measures of association and impact for case control studies and cohort studies. 
