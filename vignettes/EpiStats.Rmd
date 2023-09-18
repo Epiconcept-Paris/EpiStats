@@ -1,6 +1,6 @@
 ---
 title: "EpiStats"
-author: "Jean Pierre Decorps / Esther Kissling"
+author: "Jean Pierre Decorps"
 date: "`r Sys.Date()`"
 output: rmarkdown::pdf_document
 geometry: margin=0.5in
@@ -15,37 +15,10 @@ vignette: >
 Epiconcept is made up of a team of doctors, epidemiologists, data scientists and digital specialists.
 For more than 20 years, Epiconcept has contributed to the improvement of public health by writing software, carrying out epidemiological studies, research, evaluation and training to better detect, monitor and prevent disease and to improve treatment.
 
-Epiconcept provides software, services and studies in the following areas:
-
-  - Software for managing public health programs,
-  - Secure cloud solutions for health data collection, reporting and processing,
-  - Research projects on vaccine preventable diseases, including measuring the effectiveness and impact of vaccines,
-  - Services in the field of epidemiology (protocols, analysis, training, etc.),
-  - Expertise in data analysis,
-  - Coaching and assistance to professionals in public health,
-  - Training (in software use and epidemiology: short and longer introductory modules, advanced courses, training through long-term practice).
-
-To achieve such goals Epiconcept :
-
-  - Recognized research organization,
-  - Certified datacenter for hosting personal health data,
-  - Training organisation.
-
-Epiconcept relies on  :
-
-  - Its expertise in epidemiology
-  - Its IT expertise,
-  - Ethical values rooted in practice (responsibility and quality of services, data security and confidentiality, scientific independence, etc.),
-  - Capabilities to answer and anticipate tomorrow’s challenges (Research - evaluation, e-health, Big Data, IoT, etc.),
-  - A desire to build long-term relationships with its clients and partners.
-
-Its current customers and partners include some of the greatest names in the world such as: Santé Publique France (and many public health organizations around the world), WHO, ECDC, AFD, MSF, World Bank, etc.
 
 --------------------------------------------------------------------------------------------
 
 
-
-\newpage
 # Package Epistats
 
 ## Description
@@ -110,7 +83,7 @@ and EpiConcept.
 
 --------------------------------------------------
 
-\newpage
+
 # Working with Epistats and "Tiramisu" dataset
 
 ## Loading and recoding the dataset
