@@ -38,7 +38,7 @@ The item st returns the risk difference and its 95 percent confidence intervals,
 }
 
 \references{Stata 13: cs. https://www.stata.com/manuals13/stepitab.pdf}
-\author{jp.decorps@epiconcept.fr}
+\author{jean.pierre.decorps@gmail.com}
 \note{You can use the lowercase command "cs" in place of "CS"}
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
@@ -68,5 +68,4 @@ result$st$risk_ratio$point_estimate
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+\keyword{ ~documentation }

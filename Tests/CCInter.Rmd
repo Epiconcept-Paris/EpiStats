@@ -3,7 +3,6 @@ title: "CCInter"
 author: "Jean Pierre Decrorps"
 date: "18 septembre 2017"
 output:
-  pdf_document: default
   html_document: default
 ---
 
