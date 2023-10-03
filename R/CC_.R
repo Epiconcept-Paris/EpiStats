@@ -51,16 +51,31 @@ CC.data.frame <- function(data,
   # Contingency table
   # ===========================================================================
   FR = table(.Cases, .Exposure)
-  I1E1 = FR[2,2] <- as.numeric(FR[2,2])
-  I1E0 = FR[2,1] <- as.numeric(FR[2,1])
-  I0E0 = FR[1,1] <- as.numeric(FR[1,1])
-  I0E1 = FR[1,2] <- as.numeric(FR[1,2])
+  if(ncol(FR) < 2) {
+    warning("The 'exposure' variable is only present in either cases or controls, but not both. We cannot compute the corresponding stats.")
+  } 
   
-  STAT = computeKHI2(FR[1,1], FR[2,1], FR[1,2], FR[2,2]);
+  # I1E1 = FR[2,2] <- as.numeric(FR[2,2])
+  # I1E0 = FR[2,1] <- as.numeric(FR[2,1])
+  # I0E0 = FR[1,1] <- as.numeric(FR[1,1])
+  # I0E1 = FR[1,2] <- as.numeric(FR[1,2])
+  
+  I1E1 <- tryCatch(expr = {as.numeric(FR[2,2])},
+           error = function(e){return(0)})
+  I1E0 <- tryCatch(expr = {as.numeric(FR[2,1])},
+           error = function(e){return(0)})
+  I0E0 <- tryCatch(expr = {as.numeric(FR[1,1])},
+           error = function(e){return(0)})
+  I0E1 <- tryCatch(expr = {as.numeric(FR[1,2])},
+           error = function(e){return(0)})
+  
+  # STAT = computeKHI2(FR[1,1], FR[2,1], FR[1,2], FR[2,2]);
+  STAT = computeKHI2(I0E0, I1E0, I0E1, I1E1);
   
   FISHER <- NA
   if (exact == TRUE) {
-    FISHER = computeFisher(FR[1,1], FR[2,1], FR[1,2], FR[2,2]);
+    # FISHER = computeFisher(FR[1,1], FR[2,1], FR[1,2], FR[2,2]);
+    FISHER = computeFisher(I0E0, I1E0, I0E1, I1E1);
     PLabel = c(PLabel, "Fisher p-value")
   }
   
@@ -103,7 +118,7 @@ CC.data.frame <- function(data,
   
   # Attr.frac.pop. <- Attr.frac.ex. x proportion.of.cases.exposed.
   # Prev.frac.pop. <- Prev.frac.ex. x proportion.of.controls.exposed
-  if (R[1] >= 1.0) {
+  if (!is.na(R[1]) & R[1] >= 1.0) {
     R = CC_STATS(FR);
     # AFEST = as.numeric(R$AFest[1])
     
