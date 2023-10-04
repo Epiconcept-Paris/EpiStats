@@ -12,7 +12,7 @@ CC.data.frame <- function(data,
                           exact = F,
                           full = FALSE,
                           title = "CC") {
-
+  
   # Allowing cases to be either variable or charater string
   r <- try(class(cases),TRUE)
   if ( ! inherits(r, "try-error")) {
@@ -81,13 +81,13 @@ CC.data.frame <- function(data,
   
   # Use the function to calculate I1E1, I1E0, I0E1, and I0E0
   I1E1 <- tryCatch(expr = {extract_numeric_or_zero(FR[I1,E1])},
-           error = function(e){return(0)})
+                   error = function(e){return(0)})
   I1E0 <- tryCatch(expr = {extract_numeric_or_zero(FR[I1,E0])},
-           error = function(e){return(0)})
+                   error = function(e){return(0)})
   I0E0 <- tryCatch(expr = {extract_numeric_or_zero(FR[I0,E0])},
-           error = function(e){return(0)})
+                   error = function(e){return(0)})
   I0E1 <- tryCatch(expr = {extract_numeric_or_zero(FR[I0,E1])},
-           error = function(e){return(0)})
+                   error = function(e){return(0)})
   
   # STAT = computeKHI2(FR[1,1], FR[2,1], FR[1,2], FR[2,2]);
   STAT = computeKHI2(I0E0, I1E0, I0E1, I1E1);
