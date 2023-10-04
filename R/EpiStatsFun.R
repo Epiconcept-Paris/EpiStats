@@ -16,8 +16,10 @@ is_binary <- function(x) {
 }
 
 as_binary <- function(x) {
-  if(is_binary(x)) {
+  if(is_binary(x) & class(x) %in% c("integer", "numeric")) {
     return(x)
+  } else if(is_binary(x) & class(x) %in% c("character")) {
+    return(as.numeric(x))
   } else if(class(x) %in% c("logical")) {
     return(as.numeric(x))
   } else {
