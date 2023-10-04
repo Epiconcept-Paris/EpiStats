@@ -52,8 +52,12 @@ CC.data.frame <- function(data,
   # ===========================================================================
   FR = table(.Cases, .Exposure)
   if(ncol(FR) < 2) {
-    warning("The 'exposure' variable is only present in either cases or controls, but not both. We cannot compute the corresponding stats.")
+    warning("Zero count cells: 'exposure' is only present in either cases or controls, but not both. We cannot compute the corresponding stats.")
   } 
+  if(nrow(FR) < 2) {
+    warning("Zero count cells: 'outcome' is only present in either exposed or not exposed, but not both. We cannot compute the corresponding stats.")
+  } 
+  
   
   # I1E1 = FR[2,2] <- as.numeric(FR[2,2])
   # I1E0 = FR[2,1] <- as.numeric(FR[2,1])

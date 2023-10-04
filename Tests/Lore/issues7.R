@@ -1,7 +1,7 @@
 
 
-# CC issue ----------------------------------------------------------------
 
+# Test --------------------------------------------------------------------
 
 df <-  data.frame(
   outcome = c(rep(0, 10), rep(1, 8), rep(NA, 3)),
@@ -13,6 +13,8 @@ df <-  data.frame(
 
 cc(df, outcome, fooditem1)
 
+
+# Data preparation --------------------------------------------------------
 
 df <-  data.frame(
   outcome = sample(c(0, 1, NA), 1000, replace = TRUE, prob = c(0.40, 0.59, 0.01)),
@@ -31,6 +33,11 @@ table(df$fooditem5, df$outcome, useNA = "always")
 
 df$fooditem5 <- ifelse(df$outcome == 0 & df$fooditem5 == 1, 0, df$fooditem5)
 table(df$fooditem5, df$outcome, useNA = "always")
+
+write.csv(df, "Test.csv", row.names = FALSE, na = "")
+
+
+# CC issue ----------------------------------------------------------------
 
 cc(df, outcome, fooditem1)
 cc(df, outcome, fooditem2)
@@ -60,6 +67,7 @@ cs(df, outcome, fooditem1)
 cs(df, outcome, fooditem2)
 cs(df, outcome, fooditem3)
 cs(df, outcome, fooditem4)
+cs(df, outcome, fooditem5)
 
 cs(df, outcome, "fooditem1")
 cs(df, outcome, "fooditem2")

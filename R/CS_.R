@@ -76,16 +76,33 @@ CS.data.frame <- function(x,
   # Compute cross-table with cases & exposure
   # ===========================================================================
   FR = table(.Cases, .Exposure)
-  I1E1 = FR[2,2]
-  I1E0 = FR[2,1]
-  I0E0 = FR[1,1]
-  I0E1 = FR[1,2]
+  if(ncol(FR) < 2) {
+    warning("Zero count cells: 'exposure' is only present in either cases or controls, but not both. We cannot compute the corresponding stats.")
+  } 
+  if(nrow(FR) < 2) {
+    warning("Zero count cells: 'outcome' is only present in either exposed or not exposed, but not both. We cannot compute the corresponding stats.")
+  } 
   
-  CHI2 = computeKHI2(FR[1,1], FR[2,1], FR[1,2], FR[2,2]);
+  # I1E1 = FR[2,2]
+  # I1E0 = FR[2,1]
+  # I0E0 = FR[1,1]
+  # I0E1 = FR[1,2]
+  I1E1 <- tryCatch(expr = {as.numeric(FR[2,2])},
+                   error = function(e){return(0)})
+  I1E0 <- tryCatch(expr = {as.numeric(FR[2,1])},
+                   error = function(e){return(0)})
+  I0E0 <- tryCatch(expr = {as.numeric(FR[1,1])},
+                   error = function(e){return(0)})
+  I0E1 <- tryCatch(expr = {as.numeric(FR[1,2])},
+                   error = function(e){return(0)})
+  
+  # CHI2 = computeKHI2(FR[1,1], FR[2,1], FR[1,2], FR[2,2]);
+  CHI2 = computeKHI2(I0E0, I1E0, I0E1, I1E1);
   
   FISHER <- NA
   if (exact == TRUE) {
-    FISHER = computeFisher(FR[1,1], FR[2,1], FR[1,2], FR[2,2]);
+    # FISHER = computeFisher(FR[1,1], FR[2,1], FR[1,2], FR[2,2]);
+    FISHER = computeFisher(I0E0, I1E0, I0E1, I1E1);
     PLabel = c(PLabel, "Fisher p.value")
   }
   
@@ -123,13 +140,14 @@ CS.data.frame <- function(x,
   # ---------------------------------------------------------------------------
   VAL_RR = VAL_RE/VAL_RU;
   RR = sprintf("%3.6f", VAL_RR);
-  CI = computeRiskCI(VAL_RR, FR[2,2], TE, FR[2,1], TU);
+  # CI = computeRiskCI(VAL_RR, FR[2,2], TE, FR[2,1], TU); 
+  CI = computeRiskCI(VAL_RR, I1E1, TE, I1E0, TU); 
   VAL_RR_CILOW = CI[1];
   VAL_RR_CIHIG = CI[2];
   
   # Attribuable / Preventive fraction exposed
   # ---------------------------------------------------------------------------
-  if (VAL_RDIFF > 0) {
+  if (!is.na(VAL_RDIFF) & VAL_RDIFF > 0) {
     VAL_AFE = VAL_RDIFF / VAL_RE;
     VAL_AFP = (VAL_RT-VAL_RU)/VAL_RT;
     VAL_AFE_CILOW = (VAL_RR_CILOW - 1) / VAL_RR_CILOW;
@@ -152,7 +170,7 @@ CS.data.frame <- function(x,
   rd = list(point_estimate =VAL_RDIFF, CI95.ll = RD_CILOW, CI95.ul = RD_CIHIG)
   rr = list(point_estimate = VAL_RR, CI95.ll = VAL_RR_CILOW, CI95.ul = VAL_RR_CIHIG)
   
-  if (VAL_RDIFF > 0) {
+  if (!is.na(VAL_RDIFF) & VAL_RDIFF > 0) {
     stats = list(risk_difference = rd, 
                  risk_ratio=rr,
                  Attr.frac.ex = RES,
