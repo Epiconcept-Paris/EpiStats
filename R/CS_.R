@@ -87,13 +87,31 @@ CS.data.frame <- function(x,
   # I1E0 = FR[2,1]
   # I0E0 = FR[1,1]
   # I0E1 = FR[1,2]
-  I1E1 <- tryCatch(expr = {as.numeric(FR[2,2])},
+  
+  # Retrieving idexes of I1 cases, I0 controls, E1 exposed, E0 unexposed
+  I1 <- rownames(FR) == "1"
+  I0 <- rownames(FR) == "0"
+  E1 <- colnames(FR) == "1"
+  E0 <- colnames(FR) == "0"
+  
+  # Define a function to extract a numeric value or set to 0 if empty
+  extract_numeric_or_zero <- function(cell) {
+    result <- as.numeric(cell)
+    if (length(result) == 0) {
+      return(0)
+    } else {
+      return(result)
+    }
+  }
+  
+  # Use the function to calculate I1E1, I1E0, I0E1, and I0E0
+  I1E1 <- tryCatch(expr = {extract_numeric_or_zero(FR[I1,E1])},
                    error = function(e){return(0)})
-  I1E0 <- tryCatch(expr = {as.numeric(FR[2,1])},
+  I1E0 <- tryCatch(expr = {extract_numeric_or_zero(FR[I1,E0])},
                    error = function(e){return(0)})
-  I0E0 <- tryCatch(expr = {as.numeric(FR[1,1])},
+  I0E0 <- tryCatch(expr = {extract_numeric_or_zero(FR[I0,E0])},
                    error = function(e){return(0)})
-  I0E1 <- tryCatch(expr = {as.numeric(FR[1,2])},
+  I0E1 <- tryCatch(expr = {extract_numeric_or_zero(FR[I0,E1])},
                    error = function(e){return(0)})
   
   # CHI2 = computeKHI2(FR[1,1], FR[2,1], FR[1,2], FR[2,2]);
