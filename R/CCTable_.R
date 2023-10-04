@@ -14,7 +14,7 @@ CCTable.data.frame <- function(x,
                                full = FALSE
 )
 {
-  .Cases <- x[, cases]
+  .Cases <- as_binary(x[, cases])
   
   if (length(exposure) < 1) {
     stop("Exposure list is empty.");
@@ -42,8 +42,8 @@ CCTable.data.frame <- function(x,
   
   for (N in exposure) {
     # print(sprintf("%s", N))
-    
-    FR = table(.Cases, x[,N])
+    .Expos <- as_binary(x[,N])
+    FR = table(.Cases, .Expos)
     # print(FR)
     # KE  <- FR[2,2]    # Cases exposed
     # KU  <- FR[2,1]    # Cases unexposed

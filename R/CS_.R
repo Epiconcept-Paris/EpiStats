@@ -62,8 +62,8 @@ CS.data.frame <- function(x,
     .expos <- as.character(substitute(exposure))
   }
   
-  .Cases <- x[, .cases]
-  .Exposure <- x[, .expos]
+  .Cases <- as_binary(x[, .cases])
+  .Exposure <- as_binary(x[, .expos])
   .T1 = title
   .T2 = title
   

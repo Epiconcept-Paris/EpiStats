@@ -16,7 +16,7 @@ CSTable.data.frame <- function(x,
 )
 {
   
-  .Cases <- x[, cases]
+  .Cases <- as_binary(x[, cases])
 
   if (length(exposure) < 1) {
     stop("Exposure list is empty.");
@@ -41,8 +41,8 @@ CSTable.data.frame <- function(x,
   
   for (N in exposure) {
     # print(sprintf("%s", N))
-    
-    FR = table(.Cases, x[,N])
+    .Expos <- as_binary(x[,N])
+    FR = table(.Cases, .Expos)
     # I1E1 = FR[2,2]
     # I1E0 = FR[2,1]
     # I0E0 = FR[1,1]

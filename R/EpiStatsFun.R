@@ -2,6 +2,30 @@
 # Internal functions
 # ===========================================================================
 
+is_binary <- function(x) {
+  if(class(x) %in% c("integer", "numeric")) {
+    return(all(is.na(x) | x %in% c(0, 1)))
+  }
+  if(class(x) %in% c("character")) {
+    return(all(is.na(x) | x %in% c("0", "1")))
+  }
+  if(class(x) %in% c("logical")) {
+    return(FALSE)
+  }
+  return(FALSE)
+}
+
+as_binary <- function(x) {
+  if(is_binary(x)) {
+    return(x)
+  } else if(class(x) %in% c("logical")) {
+    return(as.numeric(x))
+  } else {
+    stop("Non-binary variable provided. Please code the variable as '0' and '1'.")
+  }
+  
+}
+
 computeKHI2 <- function(A, B, C, D)
 {
   t <- chisq.test(matrix(c(A,B,C,D),ncol=2), correct=FALSE);
