@@ -35,6 +35,9 @@ df$fooditem5 <- ifelse(df$outcome == 0 & df$fooditem5 == 1, 0, df$fooditem5)
 table(df$fooditem5, df$outcome, useNA = "always")
 
 write.csv(df, "Test.csv", row.names = FALSE, na = "")
+df <- read.csv("Test.csv")
+
+df$fooditem6 <- sample(c(FALSE, TRUE, NA), 1000, replace = TRUE, prob = c(0.20, 0.79, 0.01))
 
 
 # CC issue ----------------------------------------------------------------
@@ -44,6 +47,7 @@ cc(df, outcome, fooditem2)
 cc(df, outcome, fooditem3)
 cc(df, outcome, fooditem4)
 cc(df, outcome, fooditem5)
+cc(df, outcome, fooditem6)
 
 cc(df, outcome, "fooditem1")
 cc(df, outcome, "fooditem2")
@@ -59,7 +63,7 @@ for(x in c("fooditem1", "fooditem2")) {
   print(cc(df, outcome, x))
 }
 
-cctable(df, "outcome", c("fooditem1", "fooditem2", "fooditem3"))
+cctable(df, "outcome", c("fooditem1", "fooditem2", "fooditem3", "fooditem4", "fooditem5"))
 
 
 
