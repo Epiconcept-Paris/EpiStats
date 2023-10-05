@@ -98,6 +98,12 @@ CCInter.data.frame <- function(x,
     if (!is.factor(x[, cases])) {
       # .T = table(!x[, exposure], !x[, cases], .strate)
       .T = table(!exp, !cas, .strate)
+      
+      # Checking that we get 2 by 2 tables or return error message
+      if(dim(.T)[1] < 2 | dim(.T)[2] < 2) {
+        stop("Zero count cells: 'exposure' is only present in either cases or controls, but not both. We cannot compute the corresponding stats.")
+      }
+      
     } else {
       .d <- x
       # .d[, cases] <- 1 - (as.numeric(x[, cases])-1)
@@ -106,6 +112,12 @@ CCInter.data.frame <- function(x,
       .d[, cases] <- 1 - (as.numeric(cas)-1)
       .d[, exposure] <- 1 - (as.numeric(exp)-1)
       .T = table(.d[, exposure], .d[, cases], .strate)
+      
+      # Checking that we get 2 by 2 tables or return error message
+      if(dim(.T)[1] < 2 | dim(.T)[2] < 2) {
+        stop("Zero count cells: 'exposure' is only present in either cases or controls, but not both. We cannot compute the corresponding stats.")
+      }
+      
     }
     .loop = length(levels(.strate))
     .Compute = TRUE
