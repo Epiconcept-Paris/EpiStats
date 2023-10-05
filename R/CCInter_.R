@@ -123,8 +123,17 @@ CCInter.data.frame <- function(x,
     .Compute = TRUE
     .T <- .T1 <- toNumeric(.T, .loop)
     
-    retrieveLast <- function(.T) {
-      i <- length(.T[1,2,])
+    retrieveLast <- function(.T) { # ----LMC: Why do we do that?
+      # i <- length(.T[1,2,])
+      
+      i <- tryCatch(expr = {length(.T[1,2,])},
+                    error = function(e){1})
+      
+      # Checking that we have not reached the last stratum
+      if(i == 1) {
+        stop("Zero count cells: All strata have at least one cell = 0. We cannot compute the corresponding stats.")
+      }
+      
       if (.T[1,1, i] == 0 | .T[2,1, i] == 0 | .T[1,2, i] == 0 | .T[2,2, i] == 0) {
         msg <- sprintf("Stratum %d has values = 0 and has been removed", i)
         warning(msg)

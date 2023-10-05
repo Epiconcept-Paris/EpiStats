@@ -41,6 +41,8 @@ df$fooditem6 <- sample(c(FALSE, TRUE, NA), 1000, replace = TRUE, prob = c(0.20, 
 df$fooditem7 <- sample(c("0","1", NA), 1000, replace = TRUE, prob = c(0.20, 0.79, 0.01))
 df$onsetmonth <- sample(1:12, 1000, replace = TRUE)
 
+write.csv(df, "Tests/Lore/Test.csv", row.names = FALSE, na = "")
+df <- read.csv("Tests/Lore/Test.csv")
 
 # CC issue ----------------------------------------------------------------
 
@@ -69,19 +71,21 @@ for(x in c("fooditem1", "fooditem2")) {
 cctable(df, "outcome", c("fooditem1", "fooditem2", "fooditem3", "fooditem4", "fooditem5"))
 cctable(df, "outcome", c("fooditem1", "fooditem2", "fooditem3", "fooditem4", "fooditem5", "fooditem6", "fooditem7"))
 
-ccinter(df, "outcome", "fooditem3", by = "onsetmonth")
-# Erreur dans `[.default`(x, j, k, i) : indice hors limites
-ccinter(df, "outcome", "fooditem4", by = "onsetmonth")
-# Erreur dans `[.default`(x, j, k, i) : indice hors limites
-ccinter(df, "outcome", "fooditem5", by = "onsetmonth")
-# Erreur dans `[.default`(.T, 1, 2, ) : nombre de dimensions incorrect
-# De plus : Il y a eu 11 avis (utilisez warnings() pour les visionner)
 ccinter(df, "outcome", "fooditem6", by = "onsetmonth")
 ccinter(df, "outcome", "fooditem7", by = "onsetmonth") # FIXED!!
 # Erreur dans !x[, exposure] : type de l'argument incorrect
-
 dff <- df[df$onsetmonth == 1, ]
 cc(dff, outcome, fooditem7)
+ccinter(df, "outcome", "fooditem3", by = "onsetmonth") # NICE ERROR MESSAGE
+# Erreur dans `[.default`(x, j, k, i) : indice hors limites
+ccinter(df, "outcome", "fooditem4", by = "onsetmonth") # NICE ERROR MESSAGE
+# Erreur dans `[.default`(x, j, k, i) : indice hors limites
+
+
+ccinter(df, "outcome", "fooditem5", by = "onsetmonth")
+# Erreur dans `[.default`(.T, 1, 2, ) : nombre de dimensions incorrect
+# De plus : Il y a eu 11 avis (utilisez warnings() pour les visionner)
+
 
 ccinter(df, "outcome", "fooditem1", by = "onsetmonth")
 df$fooditem1 <- ifelse(df$outcome == 0 & df$fooditem1 == 1 & df$onsetmonth == 12, 0, df$fooditem5)
@@ -114,6 +118,34 @@ for(x in c("fooditem1", "fooditem2")) {
 
 cstable(df, "outcome", c("fooditem1", "fooditem2", "fooditem3", "fooditem4", "fooditem5"))
 cstable(df, "outcome", c("fooditem1", "fooditem2", "fooditem3", "fooditem4", "fooditem5", "fooditem6", "fooditem7"))
+
+
+csinter(df, "outcome", "fooditem1", by = "onsetmonth")
+
+csinter(df, "outcome", "fooditem6", by = "onsetmonth")
+# Erreur dans if (abs(diff) == 0) { : 
+#     valeur manquante là où TRUE / FALSE est requis
+ccinter(df, "outcome", "fooditem1", by = "onsetmonth") 
+# Erreur dans `[.default`(.T, 1, 2, ) : nombre de dimensions incorrect
+# De plus : Il y a eu 11 avis (utilisez warnings() pour les visionner)
+
+
+
+csinter(df, "outcome", "fooditem5", by = "onsetmonth") # PAS D ERREUR !!!
+# Erreur dans `[.default`(.T, 1, 2, ) : nombre de dimensions incorrect
+# De plus : Il y a eu 11 avis (utilisez warnings() pour les visionner)
+csinter(df, "outcome", "fooditem7", by = "onsetmonth") # PAS D ERREUR !!!
+# Erreur dans !x[, exposure] : type de l'argument incorrect
+dff <- df[df$onsetmonth == 1, ]
+cs(dff, outcome, fooditem7)
+csinter(df, "outcome", "fooditem1", by = "onsetmonth") 
+df$fooditem1 <- ifelse(df$outcome == 0 & df$fooditem1 == 1 & df$onsetmonth == 12, 0, df$fooditem5)
+csinter(df, "outcome", "fooditem3", by = "onsetmonth") #Nice error message
+# Erreur dans `[.default`(x, j, k, i) : indice hors limites
+csinter(df, "outcome", "fooditem4", by = "onsetmonth") #Nice error message
+# Erreur dans `[.default`(x, j, k, i) : indice hors limites
+
+
 
 # Same issue with epitable ------------------------------------------------
 
