@@ -94,6 +94,11 @@ ccinter(df, "outcome", "fooditem1", by = "onsetmonth")
 # De plus : Il y a eu 11 avis (utilisez warnings() pour les visionner)
 
 
+for(x in paste0("fooditem", 1:7)) {
+  print(x)
+  print(try(ccinter(df, "outcome", x, by = "onsetmonth")))
+}
+
 # CS ----------------------------------------------------------------------
 
 cs(df, outcome, fooditem1)
@@ -145,7 +150,10 @@ csinter(df, "outcome", "fooditem3", by = "onsetmonth") #Nice error message
 csinter(df, "outcome", "fooditem4", by = "onsetmonth") #Nice error message
 # Erreur dans `[.default`(x, j, k, i) : indice hors limites
 
-
+for(x in paste0("fooditem", 1:7)) {
+  print(x)
+  print(try(csinter(df, "outcome", x, by = "onsetmonth")))
+}
 
 # Same issue with epitable ------------------------------------------------
 

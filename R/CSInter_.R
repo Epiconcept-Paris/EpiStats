@@ -79,7 +79,11 @@ CSInter.data.frame <- function(x,
     NB_LEVELS = .loop
     for (i in .loop:1) {
       .level <- levels(.strate)[i]
-      .T = table(x[.strate ==.level, exposure], x[.strate==.level, cases])
+      
+      .Cases <- as_binary(x[.strate==.level, cases])
+      .Exposure <- as_binary(x[.strate ==.level, exposure])
+      
+      .T = table(.Exposure, .Cases)
       
       # Checking that we get 2 by 2 tables or return error message
       if(dim(.T)[1] < 2 | dim(.T)[2] < 2) {
@@ -182,8 +186,12 @@ CSInter.data.frame <- function(x,
         .exp <- 1 - (as.numeric(x[, exposure])-1)
         .by <- x[,by]
       } else {
-        .ill <- factor(x[,cases], levels = c(1,0))
-        .exp <- factor(x[,exposure], levels = c(1,0))
+        
+        .ill <- as_binary(x[, cases])
+        .exp <- as_binary(x[, exposure])
+        
+        .ill <- factor(.ill, levels = c(1,0))
+        .exp <- factor(.exp, levels = c(1,0))
         .by <- factor(x[,by], levels = rev(as.integer(levels(factor(x[,by])), na.rm=T)))
       }
       .T <- table(.exp, .ill, .by , dnn=c(exposure, cases, by))
