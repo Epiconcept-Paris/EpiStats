@@ -99,8 +99,13 @@ CSInter.data.frame <- function(x,
       CE = .T[2,2];
       CU = .T[1,2];
       TO = TE + TU;
-      if (CE == 0 | CU == 0) {
-        .Compute = FALSE
+      # Checking if zero cell to cancel the computation of the stats
+      # if (CE == 0 | CU == 0) {
+      #   .Compute = FALSE
+      # }
+      # Corresponding warning message
+      if(any(.T == 0)) {
+        warning("Zero count cells: There is at least one cell with zero in the 2-way table for the stratum ", .level, ". Please investigate further with table(x[,exposure], x[,cases], x[,by])")
       }
       NB_TOTAL = NB_TOTAL + TO
       L_CASES <- c(L_CASES, NA, CE, CU, NA)
@@ -192,7 +197,11 @@ CSInter.data.frame <- function(x,
         
         .ill <- factor(.ill, levels = c(1,0))
         .exp <- factor(.exp, levels = c(1,0))
-        .by <- factor(x[,by], levels = rev(as.integer(levels(factor(x[,by])), na.rm=T)))
+        .by <- suppressWarnings(factor(x[,by], levels = rev(as.integer(levels(factor(x[,by])), na.rm=T))))
+        # Checking if .by has been converted to NA because not numeric
+        if(sum(is.na(x[,by])) != sum(is.na(.by))) { #all(is.na(.by))
+          .by <- factor(x[,by], levels = rev(levels(factor(x[,by]))))
+        }
       }
       .T <- table(.exp, .ill, .by , dnn=c(exposure, cases, by))
       

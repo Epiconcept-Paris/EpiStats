@@ -131,7 +131,7 @@ CCInter.data.frame <- function(x,
       
       # Checking that we have not reached the last stratum
       if(i == 1) {
-        stop("Zero count cells: All strata have at least one cell = 0. We cannot compute the corresponding stats.")
+        stop("Zero count cells: All strata have at least one cell with zero in the corresponding 2-way table. We cannot compute the corresponding stats.")
       }
       
       if (.T[1,1, i] == 0 | .T[2,1, i] == 0 | .T[1,2, i] == 0 | .T[2,2, i] == 0) {
@@ -144,6 +144,12 @@ CCInter.data.frame <- function(x,
     }
     
     .T <- retrieveLast(.T)
+    
+    # Checking if we have at least one zero cell
+    if(any(.T == 0)) {
+      warning("Zero count cells: There is at least one cell with zero in the 3-way table. Please investigate further with table(x[,exposure], x[,cases], x[,by])")
+    }
+    
     S_  <- summary(epi.2by2(.T, method = "case.control", outcome="as.columns"))
     R <- S_$massoc.detail
     
@@ -212,9 +218,14 @@ CCInter.data.frame <- function(x,
       # }
       # P.est.
       # -------------------------------------------------------------
-      L_ESTIMATE <- c(L_ESTIMATE, getPestNames(round(ODD, 8)))
+      if(!is.na(ODD)) { 
+        L_ESTIMATE <- c(L_ESTIMATE, getPestNames(round(ODD, 8)))
+      } else {
+        L_ESTIMATE <- c(L_ESTIMATE, c("Odds ratio", "", "", "", "", ""))
+      }
+      
       # Attribuable Risk Ext. ---------------------------------------------------
-      if (ODD >= 1.0) {
+      if (!is.na(ODD) & ODD >= 1.0) {
         .d <- R$AFest.strata.wald
         .d <- .d %>% mutate(num = 1:nrow(.d)) %>% arrange(desc(num))
         #R <- CC_AR(.T);
