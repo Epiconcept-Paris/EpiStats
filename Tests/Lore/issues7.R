@@ -71,6 +71,7 @@ for(x in c("fooditem1", "fooditem2")) {
 cctable(df, "outcome", c("fooditem1", "fooditem2", "fooditem3", "fooditem4", "fooditem5"))
 cctable(df, "outcome", c("fooditem1", "fooditem2", "fooditem3", "fooditem4", "fooditem5", "fooditem6", "fooditem7"))
 
+ccinter(df, "outcome", "fooditem2", by = "onsetmonth")
 ccinter(df, "outcome", "fooditem6", by = "onsetmonth")
 ccinter(df, "outcome", "fooditem7", by = "onsetmonth") # FIXED!!
 # Erreur dans !x[, exposure] : type de l'argument incorrect
@@ -87,7 +88,7 @@ ccinter(df, "outcome", "fooditem5", by = "onsetmonth")
 # De plus : Il y a eu 11 avis (utilisez warnings() pour les visionner)
 
 
-ccinter(df, "outcome", "fooditem1", by = "onsetmonth")
+ccinter(x = df, cases = "outcome", exposure = "fooditem1", by = "onsetmonth")
 df$fooditem1 <- ifelse(df$outcome == 0 & df$fooditem1 == 1 & df$onsetmonth == 12, 0, df$fooditem5)
 ccinter(df, "outcome", "fooditem1", by = "onsetmonth")
 # Erreur dans `[.default`(.T, 1, 2, ) : nombre de dimensions incorrect
