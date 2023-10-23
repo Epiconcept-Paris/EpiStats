@@ -77,7 +77,7 @@ ccinter(df, "outcome", "fooditem7", by = "onsetmonth") # FIXED!!
 # Erreur dans !x[, exposure] : type de l'argument incorrect
 dff <- df[df$onsetmonth == 1, ]
 cc(dff, outcome, fooditem7)
-ccinter(df, "outcome", "fooditem3", by = "onsetmonth") # NICE ERROR MESSAGE
+ccinter(df, "outcome", "fooditem3", by = "onsetmonth") # NICE ERROR MESSAGE # We could still display the tables...
 # Erreur dans `[.default`(x, j, k, i) : indice hors limites
 ccinter(df, "outcome", "fooditem4", by = "onsetmonth") # NICE ERROR MESSAGE
 # Erreur dans `[.default`(x, j, k, i) : indice hors limites

@@ -24,7 +24,7 @@ CSTable.data.frame <- function(x,
   
   PLabel = ifelse(exact == TRUE, "p(Fisher)", "p(Chi2)")
   
-  Colnames = c("Tot.Exp.", "Exp.Cases", "AR%", "Tot.Unex.", "Unex.Cases", "AR%",
+  Colnames = c("Tot.Exp", "Cases.Exp", "AR.Exp%", "Tot.Unexp", "Cases.Unexp", "AR.Unexp%",
                        "RR", "CI ll", "CI ul", PLabel);
   
   .TotalExposed <- c()
