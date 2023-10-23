@@ -44,7 +44,7 @@ CC.data.frame <- function(data,
   
   Rownames1 <- c("Exposed", "Unexposed", "Total", "Proportion exposed")
   Colnames1 <- c("Cases", "Controls", "Total")
-  Colnames2 <- c("Point estimate", "95%CI-ll", "95%CI-ul")
+  Colnames2 <- c("Point estimate", "95%CI.ll", "95%CI.ul")
   PLabel <- c("chi2(1)", "Pr>chi2")
   
   

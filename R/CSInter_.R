@@ -44,7 +44,7 @@ CSInter.data.frame <- function(x,
   # ---------------------------------------------------------------------------
   getColnames <- function() {
     .Col1Label = sprintf("CSInter %s - %s by(%s)", cases, exposure, by);
-    c(.Col1Label, "Total", "Cases", "Risk %", "P.est.","Stats", "95%CI-ll", "95%CI-ul");
+    c(.Col1Label, "Total", "Cases", "Risk %", "P.est.","Stats", "95%CI.ll", "95%CI.ul");
   }
   
   getPestNames <- function(riskdiff) {
@@ -260,7 +260,7 @@ CSInter.data.frame <- function(x,
       C1Labels <- c(getMHLabels())
       
       DF2 <- data.frame(C1Labels, COL2, COL3, COL4, COL5, COL6)
-      colnames(DF2) <- c("Point Estimate","Chi2", "p.value", "Stats","95%CI-ll", "95%CI-ul")
+      colnames(DF2) <- c("Point Estimate","Chi2", "p.value", "Stats","95%CI.ll", "95%CI.ul")
     }
     
     if (table == TRUE) {

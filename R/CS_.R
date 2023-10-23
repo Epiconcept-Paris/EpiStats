@@ -218,7 +218,7 @@ CS.data.frame <- function(x,
   str_PCHI2 <- sprintf("%3.3f", as.numeric(round(CHI2[2], 8)))
   str_FISH <- sprintf("%3.3f", round(FISHER, 5))
   
-  Colnames2 <- c( "Point estimate", "95%CI ll", "95%CI ul")
+  Colnames2 <- c( "Point estimate", "95%CI.ll", "95%CI.ul")
   COL_PES <- c(S2(VAL_RDIFF), S2(VAL_RR), S2(VAL_AFE), S2(VAL_AFP), S2(as.numeric(CHI2[1])), str_PCHI2)
   COL_CIL <- c(RD_CILOW, VAL_RR_CILOW, VAL_AFE_CILOW, NA, NA, NA)
   COL_CIH <- c(RD_CIHIG, VAL_RR_CIHIG, VAL_AFE_CIHIG, NA, NA, NA)

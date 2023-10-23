@@ -45,10 +45,10 @@ CCInter.data.frame <- function(x,
   # ---------------------------------------------------------------------------
   getColnames <- function() {
     .Col1Label = sprintf("CCInter %s - %s by(%s)", cases, exposure, by)
-    c(.Col1Label, c("Cases","Controls","P.est.","Stats","95%CI-ll","95%CI-ul"))
+    c(.Col1Label, c("Cases","Controls","P.est.","Stats","95%CI.ll","95%CI.ul"))
   }
   getColnames2 <- function() {
-    c("P.estimate","Stats","95%CI-ll","95%CI-ul")
+    c("P.estimate","Stats","95%CI.ll","95%CI.ul")
   }
   
   getPestNames <- function(ODD) {

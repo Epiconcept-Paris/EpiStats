@@ -94,7 +94,7 @@ CCTable.data.frame <- function(x,
     #.Pvalue <- c(.Pvalue, .Stat)
     
     .Colnames = c("Tot.Cases", "Exp.Cases", "%Cases", "Tot.Ctrls", "Exp.Ctrls", "%Ctrls",
-                  "OR", "CI ll", "CI ul", PLabel);
+                  "OR", "CI.ll", "CI.ul", PLabel);
     
     .TotalCases   <- c(.TotalCases, TCA)
     .CasesExposed <- c(.CasesExposed, KE)

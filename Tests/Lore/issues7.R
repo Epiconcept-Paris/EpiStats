@@ -68,6 +68,7 @@ for(x in c("fooditem1", "fooditem2")) {
   print(cc(df, outcome, x))
 }
 
+cctable(df, "outcome", c("fooditem1", "fooditem2"))
 cctable(df, "outcome", c("fooditem1", "fooditem2", "fooditem3", "fooditem4", "fooditem5"))
 cctable(df, "outcome", c("fooditem1", "fooditem2", "fooditem3", "fooditem4", "fooditem5", "fooditem6", "fooditem7"))
 

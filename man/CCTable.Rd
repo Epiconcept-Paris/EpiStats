@@ -70,7 +70,7 @@ cctable(df, "ill", exposure=c("wmousse", "tira", "beer", "mousse"))
 # you can view it by typing (for example):
 
 res = CCTable(df, "ill", exposure = c("wmousse", "tira", "beer", "mousse"), exact=TRUE)
-res$df$`Odds Ratio`[1]
+res$df$OR[1]
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
