@@ -1,7 +1,7 @@
 Package: EpiStats
 Type: Package
 Title: Tools for Epidemiologists
-Version: 1.6-2
+Version: 1.6-3
 Date: 2023-09-29
 Authors@R: c(person("Jean Pierre", "Decorps", role = c("aut"),
                      email = "jean.pierre.decorps@gmail.com"),
@@ -26,3 +26,4 @@ Depends: epiR, dplyr
 Suggests: knitr,
     rmarkdown
 VignetteBuilder: knitr
+URL: https://github.com/Epiconcept-Paris/EpiStats
